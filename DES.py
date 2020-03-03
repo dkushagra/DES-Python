@@ -90,10 +90,9 @@ key_PBox = [14,    17,   11,    24,     1,    5,
                  41,    52,   31,    37,    47,   55,
                  30,    40,   51,    45,    33,   48,
                  44,    49,   39,    56,    34,  53,
-                 46,    42,   50,    36,    29,   32 ]
+                 46,    42,   50,    36,    29,   32]
 
 
-#
 def xor(left,xorstream):
     xorresult = np.logical_xor(left,xorstream)
 
@@ -273,9 +272,25 @@ def main():
         for i in range(16):
             data = round(data,key16[i])
 
+
+#making left side right and right side left
+        data = np.roll(data,32)
         data = (permutation(data, 1))
         print("Time taken to encrypt the data with DES is", time.time() - starttime)
         print("Encrypted data is", data)
+
+    if operate == 1:
+        data = permutation(data, 0)
+        # testing round function now
+        for i in range(16):
+            data = round(data, key16[16 - (i + 1)])
+
+        data = np.roll(data, 32)
+        data = (permutation(data, 1))
+        print("Time taken to decrypt the data with DES is", time.time() - starttime)
+        print("Decrypted data is", data)
+
+
 
 #real main stops
 
@@ -336,4 +351,4 @@ main()
 # #data = 1 0 0 0 1 0 1 1 1 0 0 1 0 1 0 0 0 0 1 1 0 0 0 1 1 1 0 1 0 1 1 0 1 0 1 0 0 1 0 1 0 0 0 1 1 0 1 0 0 1 0 0 1 0 0 0 1 1 0 1 0 0 1 0
 
 
-#what is left: write main for decrypt
+#what is left: 64 bit key support
