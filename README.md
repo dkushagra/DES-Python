@@ -6,4 +6,9 @@ Encrpytion Done
 
 To Do:
 
-Write main function for decrpyption
+Add support for 64 bit Key 
+
+
+
+Done: 
+Add support for decryption
